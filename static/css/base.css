@@ -337,3 +337,28 @@ a {
     font-weight: 700;
     font-style: normal;
 }
+
+.footer-container {
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: column; /* Stacks the social and legal sections vertically */
+    align-items: center;
+    gap: 0.5rem;            /* Creates a space between the two sections */
+}
+
+.footer-social {
+    display: flex;
+    gap: 2rem; /* Adjust the space between icons */
+}
+
+.social-link .social-icon {
+    width: 1.75rem;
+    height: 1.75rem;
+    color: #000;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover .social-icon {
+    transform: scale(1.1) translateY(-2px);
+}
