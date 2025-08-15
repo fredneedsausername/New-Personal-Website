@@ -182,7 +182,51 @@ a {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 2rem;
-    text-align: center;
+    display: flex;
+    flex-direction: column; /* Stacks the social and legal sections vertically */
+    align-items: center;
+    gap: 0.5rem;            /* Creates a space between the two sections */
+}
+
+.footer-social {
+    display: flex;
+    gap: 2rem; /* Adjust the space between icons */
+}
+
+.social-link .social-icon {
+    width: 1.75rem;
+    height: 1.75rem;
+    color: #000;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover .social-icon {
+    transform: scale(1.1) translateY(-2px);
+}
+
+/* Email copy success notification */
+.email-copy-success {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: #000;
+    color: #faf7e8;
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    font-family: 'Orbitron', monospace;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.email-copy-success.show {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .footer-text {
@@ -281,6 +325,13 @@ a {
     .main-content {
         margin-top: 70px;
     }
+
+    .email-copy-success {
+        right: 1rem;
+        bottom: 1rem;
+        font-size: 0.7rem;
+        padding: 0.6rem 1rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -336,29 +387,4 @@ a {
     src: url('../fonts/Rajdhani/Rajdhani-Bold.ttf') format('truetype');
     font-weight: 700;
     font-style: normal;
-}
-
-.footer-container {
-    margin: 0 auto;
-    padding: 0 2rem;
-    display: flex;
-    flex-direction: column; /* Stacks the social and legal sections vertically */
-    align-items: center;
-    gap: 0.5rem;            /* Creates a space between the two sections */
-}
-
-.footer-social {
-    display: flex;
-    gap: 2rem; /* Adjust the space between icons */
-}
-
-.social-link .social-icon {
-    width: 1.75rem;
-    height: 1.75rem;
-    color: #000;
-    transition: all 0.3s ease;
-}
-
-.social-link:hover .social-icon {
-    transform: scale(1.1) translateY(-2px);
 }

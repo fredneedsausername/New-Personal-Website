@@ -11,6 +11,7 @@ function initializeApp() {
     initSmoothScrolling();
     initHeaderScroll();
     initThemeEffects();
+    initEmailCopy();
 }
 
 // === MOBILE NAVIGATION === //
@@ -154,6 +155,70 @@ function initScrollAnimations() {
     // Observe elements that should animate in
     const animatedElements = document.querySelectorAll('.hero-content, .section-title');
     animatedElements.forEach(el => observer.observe(el));
+}
+
+// === EMAIL COPY FUNCTIONALITY === //
+function initEmailCopy() {
+    const emailCopyButton = document.querySelector('.email-copy');
+    
+    if (!emailCopyButton) return;
+    
+    emailCopyButton.addEventListener('click', async function(e) {
+        e.preventDefault();
+        const email = this.dataset.email;
+        
+        try {
+            await navigator.clipboard.writeText(email);
+            showEmailCopySuccess();
+        } catch (err) {
+            // Fallback for older browsers
+            fallbackCopyEmailToClipboard(email);
+        }
+    });
+}
+
+function showEmailCopySuccess() {
+    // Remove existing success message
+    const existingMessage = document.querySelector('.email-copy-success');
+    if (existingMessage) {
+        existingMessage.remove();
+    }
+    
+    // Create and show new success message
+    const successMessage = document.createElement('div');
+    successMessage.className = 'email-copy-success';
+    successMessage.textContent = 'Email copied!';
+    
+    document.body.appendChild(successMessage);
+    
+    // Trigger animation
+    setTimeout(() => successMessage.classList.add('show'), 100);
+    
+    // Remove after 3 seconds
+    setTimeout(() => {
+        successMessage.classList.remove('show');
+        setTimeout(() => successMessage.remove(), 300);
+    }, 3000);
+}
+
+function fallbackCopyEmailToClipboard(email) {
+    const textArea = document.createElement('textarea');
+    textArea.value = email;
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-999999px';
+    textArea.style.top = '-999999px';
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    
+    try {
+        document.execCommand('copy');
+        showEmailCopySuccess();
+    } catch (err) {
+        console.error('Failed to copy email: ', err);
+    }
+    
+    document.body.removeChild(textArea);
 }
 
 // === UTILITY FUNCTIONS === //
