@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request
 import os
 from datetime import datetime
+import markdown
+import bleach
 
 app = Flask(__name__)
 
@@ -34,7 +36,10 @@ def blog():
 # Parse markdown file and turn it into html
 @app.route('/blog/<post_name>')
 def blog_post(post_name):
-    return 404
+    markdown_text = "Helo"
+    html_from_markdown = markdown.markdown(markdown_text)
+    sanitized_html = bleach.clean(html_from_markdown)
+    return render_template("blog_post.html", article=sanitized_html)
 
 if __name__ == '__main__':
     app.run(debug=True, host='127.0.0.1', port=5000)
