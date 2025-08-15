@@ -10,9 +10,7 @@ function initHomePage() {
     initHeroAnimations();
     initProfileImageEffects();
     initActionButtonEffects();
-    initQuickNavEffects();
     initTypingEffect();
-    initMouseTracking();
 }
 
 // === HERO SECTION ANIMATIONS === //
@@ -125,50 +123,6 @@ function initActionButtonEffects() {
     });
 }
 
-// === QUICK NAVIGATION EFFECTS === //
-function initQuickNavEffects() {
-    const quickNavCards = document.querySelectorAll('.quick-nav-card:not(.coming-soon)');
-    
-    quickNavCards.forEach((card, index) => {
-        // Intersection Observer for scroll animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }, index * 100);
-                }
-            });
-        }, { threshold: 0.1 });
-
-        // Initial state
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(50px)';
-        card.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
-        
-        observer.observe(card);
-
-        // Hover tilt effect
-        card.addEventListener('mousemove', function(e) {
-            const rect = this.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            
-            const rotateX = (y - centerY) / 20;
-            const rotateY = (centerX - x) / 20;
-            
-            this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
-        });
-
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
-        });
-    });
-}
-
 // === TYPING EFFECT === //
 function initTypingEffect() {
     const heroTitle = document.querySelector('.hero-title');
@@ -201,46 +155,7 @@ function typeText(element, text, speed) {
     }, speed);
 }
 
-// === MOUSE TRACKING === //
-function initMouseTracking() {
-    const floatingElements = document.querySelectorAll('.float-element');
-    
-    if (floatingElements.length === 0) return;
-
-    document.addEventListener('mousemove', function(e) {
-        const mouseX = e.clientX / window.innerWidth;
-        const mouseY = e.clientY / window.innerHeight;
-        
-        floatingElements.forEach((element, index) => {
-            const speed = (index + 1) * 0.5;
-            const x = (mouseX - 0.5) * speed * 20;
-            const y = (mouseY - 0.5) * speed * 20;
-            
-            element.style.transform = `translate(${x}px, ${y}px)`;
-        });
-    });
-}
-
 // === ADVANCED ANIMATIONS === //
-
-// Floating animation for elements
-function addFloatingAnimation(element, duration = 3000, distance = 10) {
-    if (!element) return;
-    
-    let start = null;
-    const originalTransform = element.style.transform || 'translateY(0px)';
-    
-    function animate(timestamp) {
-        if (!start) start = timestamp;
-        const progress = ((timestamp - start) % duration) / duration;
-        const yOffset = Math.sin(progress * Math.PI * 2) * distance;
-        
-        element.style.transform = `${originalTransform} translateY(${yOffset}px)`;
-        requestAnimationFrame(animate);
-    }
-    
-    requestAnimationFrame(animate);
-}
 
 // Reveal text animation
 function revealText(element, delay = 0) {

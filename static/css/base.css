@@ -193,6 +193,15 @@ a {
     color: rgba(0, 0, 0, 0.7);
 }
 
+.license-link {
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.license-link:hover {
+    color: rgba(0, 0, 0, 0.9);
+}
+
 /* === UTILITY CLASSES === */
 .container {
     max-width: 1200px;

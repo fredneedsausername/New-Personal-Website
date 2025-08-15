@@ -128,39 +128,8 @@ function initHeaderScroll() {
 
 // === THEME AND VISUAL EFFECTS === //
 function initThemeEffects() {
-    // Add parallax effect to floating elements
-    initParallaxEffect();
-    
     // Initialize intersection observer for animations
     initScrollAnimations();
-}
-
-function initParallaxEffect() {
-    const floatingElements = document.querySelectorAll('.float-element');
-    
-    if (floatingElements.length === 0) return;
-
-    function updateParallax() {
-        const scrolled = window.pageYOffset;
-        const rate = scrolled * -0.5;
-        
-        floatingElements.forEach((element, index) => {
-            const speed = (index + 1) * 0.3;
-            element.style.transform = `translateY(${rate * speed}px)`;
-        });
-    }
-
-    // Throttled parallax update
-    let ticking = false;
-    function requestParallaxUpdate() {
-        if (!ticking) {
-            requestAnimationFrame(updateParallax);
-            ticking = true;
-            setTimeout(() => { ticking = false; }, 16);
-        }
-    }
-
-    window.addEventListener('scroll', requestParallaxUpdate);
 }
 
 function initScrollAnimations() {
@@ -183,7 +152,7 @@ function initScrollAnimations() {
     }, observerOptions);
 
     // Observe elements that should animate in
-    const animatedElements = document.querySelectorAll('.quick-nav-card, .hero-content, .section-title');
+    const animatedElements = document.querySelectorAll('.hero-content, .section-title');
     animatedElements.forEach(el => observer.observe(el));
 }
 
