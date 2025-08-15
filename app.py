@@ -12,7 +12,29 @@ def home():
 
 @app.route('/custom-website-license')
 def custom_website_license():
-    return 200
+    # Read the LICENSE file
+    try:
+        with open('LICENSE', 'r', encoding='utf-8') as file:
+            license_text = file.read()
+    except FileNotFoundError:
+        return 404
+    
+    # Convert markdown to HTML
+    html_from_markdown = markdown.markdown(license_text, extensions=['fenced_code', 'tables'])
+    
+    # Sanitize HTML
+    allowed_tags = [
+        'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'br', 'strong', 'em', 'b', 'i',
+        'ul', 'ol', 'li', 'a', 'img', 'blockquote', 'hr',
+        'table', 'thead', 'tbody', 'th', 'td', 'tr'
+    ]
+    allowed_attributes = {
+        'a': ['href', 'title', 'target'],
+        'img': ['src', 'alt', 'title', 'width', 'height']
+    }
+    sanitized_html = bleach.clean(html_from_markdown, tags=allowed_tags, attributes=allowed_attributes)
+    
+    return render_template("custom_website_license.html", license_content=sanitized_html)
 
 # Get newest blog posts first
 # Manually constructed cards for maximum aesthetic result

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/custom_website_license.css') }}">
+{% endblock %}
+
+{% block content %}
+<article class="license-article">
+    <div class="license-container">
+        <!-- License Header -->
+        <header class="license-header">
+            <nav class="license-navigation">
+                <a href="{{ url_for('home') }}" class="back-link">
+                    <span class="back-arrow">←</span>
+                    <span class="back-text">BACK TO HOME</span>
+                </a>
+            </nav>
+        </header>
+
+        <!-- License Content -->
+        <div class="license-content">
+            {{ license_content|safe }}
+        </div>
+
+        <!-- License Footer -->
+        <footer class="license-footer">
+            <div class="license-actions">
+                <a href="{{ url_for('home') }}" class="action-btn back-btn">
+                    <span class="btn-text">BACK TO HOME</span>
+                    <span class="btn-arrow">→</span>
+                </a>
+            </div>
+        </footer>
+    </div>
+</article>
+{% endblock %}
+
+{% block js %}
+<script src="{{ url_for('static', filename='js/custom_website_license.js') }}"></script>
+{% endblock %}
