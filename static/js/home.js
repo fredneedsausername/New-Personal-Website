@@ -7,39 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Initialize home page functionality
 function initHomePage() {
-    initHeroAnimations();
     initProfileImageEffects();
     initActionButtonEffects();
-}
-
-// === HERO SECTION ANIMATIONS === //
-function initHeroAnimations() {
-    const heroElements = document.querySelectorAll('.hero-name, .hero-title, .hero-location, .hero-description, .hero-actions');
-    
-    // Staggered fade-in animation
-    heroElements.forEach((element, index) => {
-        element.style.opacity = '0';
-        element.style.transform = 'translateY(30px)';
-        element.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
-        
-        setTimeout(() => {
-            element.style.opacity = '1';
-            element.style.transform = 'translateY(0)';
-        }, 200 + (index * 150));
-    });
-
-    // Profile image fade-in
-    const profileImage = document.querySelector('.profile-image');
-    if (profileImage) {
-        profileImage.style.opacity = '0';
-        profileImage.style.transform = 'scale(0.8)';
-        profileImage.style.transition = 'all 1s cubic-bezier(0.4, 0, 0.2, 1)';
-        
-        setTimeout(() => {
-            profileImage.style.opacity = '1';
-            profileImage.style.transform = 'scale(1)';
-        }, 100);
-    }
 }
 
 // === PROFILE IMAGE EFFECTS === //
