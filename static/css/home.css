@@ -40,25 +40,12 @@
     z-index: 2;
 }
 
-.image-glow {
-    position: absolute;
-    top: -10px;
-    left: -10px;
-    right: -10px;
-    bottom: -10px;
-    border-radius: 50%;
-    background: linear-gradient(45deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.05));
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    z-index: 1;
-}
-
 .profile-image-container:hover .profile-image {
     transform: scale(1.05);
     border-color: rgba(0, 0, 0, 0.2);
 }
 
-.profile-image-container:hover .image-glow {
+.profile-image-container:hover {
     opacity: 1;
 }
 

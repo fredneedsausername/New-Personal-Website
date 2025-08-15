@@ -10,7 +10,6 @@ function initHomePage() {
     initHeroAnimations();
     initProfileImageEffects();
     initActionButtonEffects();
-    initTypingEffect();
 }
 
 // === HERO SECTION ANIMATIONS === //
@@ -123,38 +122,6 @@ function initActionButtonEffects() {
     });
 }
 
-// === TYPING EFFECT === //
-function initTypingEffect() {
-    const heroTitle = document.querySelector('.hero-title');
-    if (!heroTitle) return;
-
-    const originalText = heroTitle.textContent;
-    heroTitle.textContent = '';
-    
-    // Start typing after hero animations
-    setTimeout(() => {
-        typeText(heroTitle, originalText, 100);
-    }, 1000);
-}
-
-function typeText(element, text, speed) {
-    let i = 0;
-    const timer = setInterval(() => {
-        if (i < text.length) {
-            element.textContent += text.charAt(i);
-            i++;
-        } else {
-            clearInterval(timer);
-            // Add cursor blink effect
-            element.innerHTML += '<span class="cursor">|</span>';
-            setTimeout(() => {
-                const cursor = element.querySelector('.cursor');
-                if (cursor) cursor.remove();
-            }, 2000);
-        }
-    }, speed);
-}
-
 // === ADVANCED ANIMATIONS === //
 
 // Reveal text animation
@@ -214,15 +181,6 @@ style.textContent = `
             transform: scale(4);
             opacity: 0;
         }
-    }
-    
-    .cursor {
-        animation: cursor-blink 1s infinite;
-    }
-    
-    @keyframes cursor-blink {
-        0%, 50% { opacity: 1; }
-        51%, 100% { opacity: 0; }
     }
     
     .menu-open {
