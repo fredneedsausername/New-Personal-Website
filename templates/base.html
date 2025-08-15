@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fred's site</title>
+    
+    <!-- Base CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    
+    <!-- Page-specific CSS -->
+    {% block css %}{% endblock %}
+    
+    <!-- Futuristic Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Fixed Header -->
+    <header class="main-header">
+        <nav class="main-nav">
+            <div class="nav-container">
+                <a href="{{ url_for('home') }}" class="nav-logo">
+                    <span class="logo-text">Fred</span>
+                </a>
+                
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="{{ url_for('home') }}" class="nav-link {% if request.endpoint == 'home' %}active{% endif %}">
+                            HOME
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for('projects') }}" class="nav-link {% if request.endpoint == 'projects' %}active{% endif %}">
+                            PROJECTS
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for('blog') }}" class="nav-link {% if request.endpoint == 'blog' %}active{% endif %}">
+                            BLOG
+                        </a>
+                    </li>
+                    <!-- Future sections can be easily added here -->
+                </ul>
+                
+                <button class="mobile-menu-toggle" aria-label="Toggle mobile menu">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <p class="footer-text">&copy; Federico Veronesi. <a href="{{ url_for('custom_website_license') }}">Custom License</a>.</p>
+        </div>
+    </footer>
+
+    <!-- Base JavaScript -->
+    <script src="{{ url_for('static', filename='js/base.js') }}"></script>
+    
+    <!-- Page-specific JavaScript -->
+    {% block js %}{% endblock %}
+</body>
+</html>
