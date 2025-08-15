@@ -33,13 +33,32 @@ def project_detail(project_name):
 def blog():
     return 404
 
-# Parse markdown file and turn it into html
 @app.route('/blog/<post_name>')
 def blog_post(post_name):
-    markdown_text = "Helo"
-    html_from_markdown = markdown.markdown(markdown_text)
-    sanitized_html = bleach.clean(html_from_markdown)
+    # Read your markdown file (adjust path as needed)
+    try:
+        with open(f'blog/posts/{post_name}.md', 'r', encoding='utf-8') as file:
+            markdown_text = file.read()
+    except FileNotFoundError:
+        return 404
+    
+    # Convert markdown to HTML
+    html_from_markdown = markdown.markdown(markdown_text, extensions=['fenced_code', 'tables'])
+    
+    # Sanitize HTML
+    allowed_tags = [
+        'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'br', 'strong', 'em', 'b', 'i',
+        'ul', 'ol', 'li', 'a', 'img', 'blockquote', 'hr',
+        'table', 'thead', 'tbody', 'th', 'td', 'tr'
+    ]
+    allowed_attributes = {
+        'a': ['href', 'title', 'target'],
+        'img': ['src', 'alt', 'title', 'width', 'height']
+    }
+    sanitized_html = bleach.clean(html_from_markdown, tags=allowed_tags, attributes=allowed_attributes)
+    
     return render_template("blog_post.html", article=sanitized_html)
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='127.0.0.1', port=5000)
