@@ -22,15 +22,17 @@ def custom_website_license():
     # Convert markdown to HTML
     html_from_markdown = markdown.markdown(license_text, extensions=['fenced_code', 'tables'])
     
-    # Sanitize HTML
     allowed_tags = [
         'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'br', 'strong', 'em', 'b', 'i',
         'ul', 'ol', 'li', 'a', 'img', 'blockquote', 'hr',
-        'table', 'thead', 'tbody', 'th', 'td', 'tr'
+        'table', 'thead', 'tbody', 'th', 'td', 'tr',
+        'pre', 'code'
     ]
     allowed_attributes = {
         'a': ['href', 'title', 'target'],
-        'img': ['src', 'alt', 'title', 'width', 'height']
+        'img': ['src', 'alt', 'title', 'width', 'height'],
+        'code': ['class'],
+        'pre': ['class']
     }
     sanitized_html = bleach.clean(html_from_markdown, tags=allowed_tags, attributes=allowed_attributes)
     
