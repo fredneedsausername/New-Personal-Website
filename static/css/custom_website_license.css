@@ -1,8 +1,5 @@
 /* === LICENSE PAGE STYLES === */
 
-/* Import Fira Code - lightweight web font designed for coding */
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500&display=swap');
-
 .license-article {
     background-color: #faf7e8;
     min-height: calc(100vh - 160px);
@@ -186,7 +183,7 @@
 /* === CODE BLOCKS AND INLINE CODE === */
 .license-content pre,
 .license-content code {
-    font-family: 'Fira Code', 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+    font-family: 'PT Mono', 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
     font-size: clamp(0.9rem, 1.6vw, 1rem);
     line-height: 1.6;
     font-weight: 400;
@@ -462,4 +459,13 @@
         right: 0.5rem;
         padding: 0.1rem 0.3rem;
     }
+}
+
+/* PT Mono Font Face */
+@font-face {
+    font-family: 'PT Mono';
+    src: url('../fonts/PT_Mono/PTMono-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
 }
